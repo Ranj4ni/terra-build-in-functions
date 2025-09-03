@@ -29,6 +29,6 @@ resource "aws_instance" "web" {
 
   tags = {
     Name =  upper("dev-${count.index + 1}")               # Name = each.value to for_each
-    Environment = var.environment                          # it gives uppercase names for ec2 like, DEV-1 .
+    Environment = var.environment                          # it gives uppercase names for ec2 like, DEV-1 , DEV-2
   }
 }
