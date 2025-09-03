@@ -1,0 +1,27 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
+  }
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "us-west-1"
+}
+resource "aws_s3_bucket" "mys3bucket" {
+    for_each = {
+        abi = "my-terra-bucket-devops"   # for naming conversion
+        nisha = "my-terra-bucket-devops"
+        ranjani = "my-terra-bucket-devops"
+    }
+  bucket = "${each.key}-${each.value}"
+  acl    = "private"
+  tags = {
+    Environment = "My-${each.key}-devops"
+    bucketname  = "${each.key}-${each.value}"
+    eachvalue   =  each.value
+  }
+}
